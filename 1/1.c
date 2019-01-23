@@ -161,7 +161,9 @@ void test7() {
         printf("i < 100 = %d\n", i < 100 );
         printf("(char) i < 100 = %d\n", (char) i < 100 );
 
-        if (v != NULL && (char) i < 100) {  // Overflow if x not power of 4 and x >= 128
+        // Overflow if:
+        // x not power of 4 and reminder of division x/256 >= 128
+        if (v != NULL && (char) i < 100) {
             v[i] = x;
             printf("written on vector: v[%u] = %d\n", i, v[i]);
         }
