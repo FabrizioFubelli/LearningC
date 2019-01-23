@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-void test1(), test2(), test3(), test4(), test5(), test6();
+void test1(), test2(), test3(), test4(), test5(), test6(), test7();
 
 int main(int argc, char* argv[]) {
     //getchar();  // Wait enter
@@ -23,6 +23,8 @@ int main(int argc, char* argv[]) {
         test5();
     } else if (strcmp(argv[1], "6") == 0) {
         test6();
+    } else if (strcmp(argv[1], "7") == 0) {
+        test7();
     } else {
         printf("Usage: %s <test_number>\n", argv[0]);
         printf("          Available tests: 1, 2\n\n");
@@ -145,4 +147,29 @@ void test6() {
     printf("\n(BEFORE) b = %s\n", b);
     f(b);
     printf("(AFTER)  b = %s\n", b);
+}
+
+void test7() {
+    #define X 250
+    int* f(int x) {
+        unsigned char i = (unsigned char)x;
+        printf("i = %u\n", i);
+        printf("(char) i = %c\n", (char) i);
+        printf("(int) i = %d\n", (int) i);
+        int* v = (int*)malloc(100*sizeof(int));
+
+        printf("i < 100 = %d\n", i < 100 );
+        printf("(char) i < 100 = %d\n", (char) i < 100 );
+
+        if (v != NULL && (char) i < 100) {  // Overflow if x not multiple of 4 and x >= 100
+            v[i] = x;
+            printf("written on vector: v[%u] = %d\n", i, v[i]);
+        }
+        return v;
+    }
+    /*printf("sizeof(int) = %d\n", sizeof(int));
+    printf("sizeof(long) = %d\n", sizeof(long));
+    printf("sizeof(unsigned char) = %d\n", sizeof(char));*/
+    printf("f(%d)[%d] = %d\n", X, X, f(X)[X]);
+    printf("\n");
 }
