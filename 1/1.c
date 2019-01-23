@@ -2,8 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-void declarations(), test1(), test2(), test3(), test4();
-char* strcat(char* dest, const char* src);
+void test1(), test2(), test3(), test4(), test5(), test6();
 
 int main(int argc, char* argv[]) {
     //getchar();  // Wait enter
@@ -20,6 +19,10 @@ int main(int argc, char* argv[]) {
         test3();
     } else if (strcmp(argv[1], "4") == 0) {
         test4();
+    } else if (strcmp(argv[1], "5") == 0) {
+        test5();
+    } else if (strcmp(argv[1], "6") == 0) {
+        test6();
     } else {
         printf("Usage: %s <test_number>\n", argv[0]);
         printf("          Available tests: 1, 2\n\n");
@@ -95,7 +98,16 @@ void test2() {
 }
 
 void test3() {
-    char* dest = (char*) malloc(sizeof(char)*11);
+    char* strcat(char* dest, const char* src) {
+        char* cat = dest;
+        while(*dest) dest++;
+        //while(*dest++ = *src++);
+        do {
+            *dest++ = *src;
+        } while(*++src);
+        return cat;
+    }
+    char* dest = (char*) malloc(sizeof(char)*13);
     strcpy(dest, "INIZIO");
     char* src =  " FINE";
     char* concatenate = strcat(dest, src);
@@ -112,21 +124,25 @@ void test4() {
     free(bar);
 }
 
-
-
-void declarations() {
-    int x;
-    int a, b, c, d;
-    char letter;
-    float the_float;
+void test5() {
+    struct {
+        char s1[3];
+        char s2[5];
+    } s;
+    strcpy(s.s1, "ok");
+    strcpy(s.s2, "flag");
+    printf("sizeof(&s) = %d\n", sizeof(&s));                     // 8
+    printf("&((char*) s)[3] = %s\n", &((char*) &s)[3]);
 }
 
-char* strcat(char* dest, const char* src) {
-    char* cat = dest;
-    while(*dest) dest++;
-    //while(*dest++ = *src++);
-    do {
-        *dest++ = *src;
-    } while(*++src);
-    return cat;
+void test6() {
+    void f(char* s) {
+        do *s = *s > 'a' && *s < 'z' ? *s - 'a' + 'A' : *s;
+        while (*s++);
+    }
+    char* b = (char*) malloc(sizeof(char)*6);
+    strcpy(b, "guess");
+    printf("\n(BEFORE) b = %s\n", b);
+    f(b);
+    printf("(AFTER)  b = %s\n", b);
 }
