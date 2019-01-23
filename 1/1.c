@@ -150,7 +150,7 @@ void test6() {
 }
 
 void test7() {
-    #define X 250
+    #define X 128
     int* f(int x) {
         unsigned char i = (unsigned char)x;
         printf("i = %u\n", i);
@@ -161,7 +161,7 @@ void test7() {
         printf("i < 100 = %d\n", i < 100 );
         printf("(char) i < 100 = %d\n", (char) i < 100 );
 
-        if (v != NULL && (char) i < 100) {  // Overflow if x not multiple of 4 and x >= 100
+        if (v != NULL && (char) i < 100) {  // Overflow if x not multiple of 4 and x >= 128
             v[i] = x;
             printf("written on vector: v[%u] = %d\n", i, v[i]);
         }
