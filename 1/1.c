@@ -2,7 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 
-void declarations(), test1(), test2();
+void declarations(), test1(), test2(), test3(), test4();
+char* strcat(char* dest, const char* src);
 
 int main(int argc, char* argv[]) {
     //getchar();  // Wait enter
@@ -15,6 +16,8 @@ int main(int argc, char* argv[]) {
         test1();
     } else if (strcmp(argv[1], "2") == 0) {
         test2();
+    } else if (strcmp(argv[1], "3") == 0) {
+        test3();
     } else {
         printf("Usage: %s <test_number>\n", argv[0]);
         printf("          Available tests: 1, 2\n\n");
@@ -89,9 +92,35 @@ void test2() {
 
 }
 
+void test3() {
+    char* dest = (char*) malloc(sizeof(char)*11);
+    strcpy(dest, "INIZIO");
+    char* src =  " FINE";
+    char* concatenate = strcat(dest, src);
+    printf("%s\n", concatenate);
+}
+
+void test4() {
+    void* bar = malloc(320);
+    void* baz = &((long*)bar)[???];
+    printf("%ld\n", (char*)baz - (char*)bar);
+    free(bar);
+}
+
+
 void declarations() {
     int x;
     int a, b, c, d;
     char letter;
     float the_float;
+}
+
+char* strcat(char* dest, const char* src) {
+    char* cat = dest;
+    while(*dest) dest++;
+    //while(*dest++ = *src++);
+    do {
+        *dest++ = *src;
+    } while(*++src);
+    return cat;
 }
