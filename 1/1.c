@@ -18,6 +18,8 @@ int main(int argc, char* argv[]) {
         test2();
     } else if (strcmp(argv[1], "3") == 0) {
         test3();
+    } else if (strcmp(argv[1], "4") == 0) {
+        test4();
     } else {
         printf("Usage: %s <test_number>\n", argv[0]);
         printf("          Available tests: 1, 2\n\n");
@@ -101,11 +103,15 @@ void test3() {
 }
 
 void test4() {
-    void* bar = malloc(320);
-    void* baz = &((long*)bar)[???];
-    printf("%ld\n", (char*)baz - (char*)bar);
+    printf("sizeof(int) = %d\n",sizeof(int));                               // 4
+    void* bar = malloc(320);                                                // 320 bytes
+    void* baz = &((int*)bar)[5];                                            // pointer to &bar + 4*5
+    printf("(char*)baz = %ld\n", (char*)baz);
+    printf("(char*)bar = %ld\n", (char*)bar);
+    printf("(char*)baz - (char*)bar) = %ld\n", (char*)baz - (char*)bar);    // 20
     free(bar);
 }
+
 
 
 void declarations() {
