@@ -52,9 +52,41 @@ void test1() {
 void test2() {
     #define N 3
     int a[N][N] = {1,2,3,4,5,6,7,8,9};
-    printf("a = %d\n", a);
-    int el5 = **(a+1*N+1);
-    printf("**(a+1*N+1) = %d\n", el5);
+
+    printf("sizeof(int) = %d\n", sizeof(int));  // 4
+    printf("a = %d\n", a);                      // pointer
+    printf("a+1 = %d\n", a+1);                  // pointer + 12 (12 = sizeof(int)*3)
+
+    int sum = 1*N+1;                            // 4
+
+    printf("1*N+1 = %d\n", sum);
+    printf("a+1*N+1 = %d\n", a+sum);            // pointer + 48 (48 = (sizeof(int)*3)*4)
+    printf("sizeof(a) = %d\n", sizeof(a));      // 36 == sizeof(int)*N*M
+    printf("**a = %d\n", **a);
+
+    int result = **(a+1*N+1);                   // a+1*N+1 + 32
+    printf("**(a+1*N+1) = %d\n", result);
+
+    printf("*(a+1) = %d\n", *(a+1));            // a+1
+    int result2 = *(*(a+1)+1);                  // 5
+    printf("*(*(a+1)+1) = %d\n", result2);
+
+    printf("\n\nWhy these results:\n\n");
+    printf("int a[%d][%d] = {1,2,3,4,5,6,7,8,9}\n\n", N, N);
+
+    printf("**a   = %d\n", **a);                // 1
+    printf("**a+1 = %d\n", **a+1);              // 2
+    printf("**a+2 = %d\n", **a+2);              // 3
+    printf("**a+3 = %d\n", **a+3);              // 4
+    printf("**a+4 = %d\n", **a+4);              // 5
+    printf("**a+8 = %d\n\n", **a+8);            // 9
+
+    printf("**(a)   = %d\n", **(a));            // 1 == **a
+    printf("**(a+1) = %d\n", **(a+1));          // 4 == **a+N*1 == **a+3
+    printf("**(a+2) = %d\n", **(a+2));          // 7 == **a+N*2 == **a+6
+
+    // printf("**(a+3) = %d\n", **(a+3));       // Overflow ( **a+N*3 == **a+9 )
+
 }
 
 void declarations() {
